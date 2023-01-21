@@ -1,4 +1,3 @@
-# case_atualizar_ec2_ami
 
 Playbook com a finalidade de checar as instâncias EC2 e atualizar as que estiverem utilizando uma AMI ID antiga.
 
