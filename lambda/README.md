@@ -1,4 +1,4 @@
-# function.py
+# lambda_function.py
 
 Função lambda para atualizar a AMI das instâncias.
 
