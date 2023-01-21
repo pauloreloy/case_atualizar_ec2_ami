@@ -2,14 +2,13 @@
 
 Playbook com a finalidade de checar as instâncias EC2 e atualizar as que estiverem utilizando uma AMI ID antiga.
 
-## Necessário criação das roles:
+## Necessário criação da role:
 
 ```
 Role: EC2_ROLE_S3READ
 
 Policy: arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
 Policy: arn:aws:iam::aws:policy/AmazonEC2FullAccess
-
 
 ```
 
