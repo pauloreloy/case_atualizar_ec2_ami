@@ -19,3 +19,15 @@ Policy: arn:aws:iam::aws:policy/AmazonEC2FullAccess
 Policy: arn:aws:iam::aws:policy/AmazonSSMFullAccess
 ```
 
+## Ajustes
+
+Ajustar o nome do bucket no function.py:
+
+```
+ajustar bucket-xxx:
+
+aws s3 cp s3://bucket-xxx/app/app.bin /app/app.bin
+aws s3 cp s3://bucket-xxx/app/config1.cfg /app/config1.cfg
+aws s3 cp s3://bucket-xxx/app/config2.cfg /app/config2.cfg
+aws s3 cp s3://bucket-xxx/app/config3.cfg /app/config3.cfg
+```
