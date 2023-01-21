@@ -9,7 +9,6 @@ Role: EC2_ROLE_S3READ
 
 Policy: arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
 Policy: arn:aws:iam::aws:policy/AmazonEC2FullAccess
-
 ```
 
 ## Variáveis
