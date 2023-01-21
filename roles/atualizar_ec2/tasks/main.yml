@@ -1,0 +1,33 @@
+---
+- name: "Criar a role 'EC2_ROLE_S3READ'"
+  community.aws.iam_role:
+    name: EC2_ROLE_S3READ
+    assume_role_policy_document: "{{ lookup('file','role_template.json') }}"
+    managed_policies:
+      - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+      - arn:aws:iam::aws:policy/AmazonEC2FullAccess
+
+- name: Retornar o ID da AMI mais atual do 'Amazon Linux 2'
+  set_fact:
+    latest_ami_id: "{{ lookup('aws_ssm', '/aws/service/ami-amazon-linux-latest/{{ ami_name }}') }}"
+    
+- name: Retornar instancias na conta
+  amazon.aws.ec2_instance_info:
+    filters:
+      instance-state-name: [ "running", "stopped" ]
+  register: instances_list
+
+- name: Validando AMI ID das instancias
+  vars: 
+    old_name: "{{ instance_entry.tags.Name }}"
+    old_instance_id: "{{ instance_entry.instance_id }}"
+    old_instance_type: "{{ instance_entry.instance_type }}"
+    old_key_name: "{{ instance_entry.key_name }}"
+    old_subnet_id: "{{ instance_entry.subnet_id }}"
+    old_vpc_id: "{{ instance_entry.vpc_id }}"
+    old_security_group_id: "{{ instance_entry.security_groups[0].group_id }}"
+  include_tasks: "deploy_ec2.yml"
+  when: "instance_entry.image_id != latest_ami_id"
+  loop: "{{ instances_list.instances }}"
+  loop_control:
+    loop_var: instance_entry

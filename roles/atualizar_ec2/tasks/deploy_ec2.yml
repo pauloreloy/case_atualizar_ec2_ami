@@ -1,0 +1,25 @@
+---
+- name: Realizar o deploy da EC2 com AMI atualizada
+  amazon.aws.ec2_instance:
+    name:  "{{ old_name }}_new"
+    instance_type: "{{ old_instance_type }}"
+    image_id: "{{ latest_ami_id }}"
+    key_name: "{{ old_key_name }}"
+    iam_instance_profile: "EC2_ROLE_S3READ"
+    user_data: "{{ lookup('file', 'user-data.sh') }}"
+    state: present
+  register: new_instance_deploy
+
+- name: Terminar EC2 desatualizada
+  amazon.aws.ec2_instance:
+    state: absent
+    instance_ids:
+      - "{{ old_instance_id }}"
+
+- name: Ajustar tag Name da nova EC2
+  amazon.aws.ec2_tag:
+    resource: '{{ new_instance_deploy.instances[0].instance_id }}'
+    state: present
+    tags:
+      Name: "{{ old_name }}"
+
