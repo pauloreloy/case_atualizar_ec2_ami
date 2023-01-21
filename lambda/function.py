@@ -69,8 +69,7 @@ def check_instances(latest_ami_id):
     for instance in ec2_client.instances.all():
         instance_state = instance.state['Name']
         if(instance_state == "running"):
-            
-            if(instance.image.id == latest_ami_id):
+            if(instance.image.id != latest_ami_id):
                 deploy_ec2(instance, latest_ami_id)
 
 def lambda_handler(event, context):
