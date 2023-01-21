@@ -19,6 +19,19 @@ main-playbook.yml
 ami_name: 'amzn2-ami-kernel-5.10-hvm-x86_64-gp2'
 ```
 
+## Ajustes
+
+Ajustar o nome do bucket no user-data.sh:
+
+```
+ajustar bucket-xxx:
+
+aws s3 cp s3://bucket-xxx/app/app.bin /app/app.bin
+aws s3 cp s3://bucket-xxx/app/config1.cfg /app/config1.cfg
+aws s3 cp s3://bucket-xxx/app/config2.cfg /app/config2.cfg
+aws s3 cp s3://bucket-xxx/app/config3.cfg /app/config3.cfg
+```
+
 ## Rodar playbook
 
 ```bash
