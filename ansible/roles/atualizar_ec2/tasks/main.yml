@@ -1,12 +1,4 @@
 ---
-#- name: "Criar a role 'EC2_ROLE_S3READ'"
-#  community.aws.iam_role:
-#    name: EC2_ROLE_S3READ
-#    assume_role_policy_document: "{{ lookup('file','role_template.json') }}"
-#    managed_policies:
-#      - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
-#      - arn:aws:iam::aws:policy/AmazonEC2FullAccess
-
 - name: Retornar o ID da AMI mais atual do 'Amazon Linux 2'
   set_fact:
     latest_ami_id: "{{ lookup('aws_ssm', '/aws/service/ami-amazon-linux-latest/{{ ami_name }}') }}"
