@@ -1,7 +1,7 @@
 # ansible/
 
-Solução via ansible
+Solução via Ansible
 
 # lambda/
 
-Solução servless via lambda
+Solução Servless via Lambda
