@@ -6,7 +6,7 @@
 - name: Retornar instancias na conta
   amazon.aws.ec2_instance_info:
     filters:
-      instance-state-name: [ "running", "stopped" ]
+      instance-state-name: [ "running" ]
   register: instances_list
 
 - name: Validando AMI ID das instancias
